@@ -7,12 +7,10 @@ import routes from "./routes/log";
 dotenv.config();
 
 const app: Application = express();
-app.use(
-	cors({
-		origin: 'http://localhost:5173'
-	})
-)
-const port = process.env.BACKEND_PORT;
+app.use(cors({
+  origin: '*'
+}));
+const port = process.env.BACKEND_PORT || 3000;
 
 mongoConnect();
 
