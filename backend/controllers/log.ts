@@ -40,8 +40,9 @@ export async function getByDate(req: Request, res: Response) {
 export async function getLatest(req: Request, res: Response) {
   try {
     const latest = await Brew.findOne().sort({createdAt: -1})
+    console.log(latest)
 
-    return res.status(200).json({latest});
+    return res.status(200).json(latest);
   } catch (e) {
     return res.status(418).json({ message: "Error" });
   }
