@@ -27,11 +27,11 @@ export async function getByDate(req: Request, res: Response) {
     }
 
     const liter = await litersBetween(
-      new Date(new Date(String(startDate)).setHours(0o0, 0o0, 0o0)), 
+      new Date(new Date(String(startDate)).setHours(0o0, 0o0, 0o0)),
       new Date(new Date(String(endDate)).setHours(23, 59, 59))
-      )
+    );
 
-    return res.status(200).json({liters: liter});
+    return res.status(200).json({ liters: liter });
   } catch (e) {
     return res.status(418).json({ message: "Error" });
   }
@@ -39,8 +39,10 @@ export async function getByDate(req: Request, res: Response) {
 
 export async function getLatest(req: Request, res: Response) {
   try {
-    const latest = await Brew.findOne().sort({createdAt: -1})
-    console.log(latest)
+    const latest = await Brew.find().sort({ createdAt: -1 }).findOne();
+    if (latest == null) {
+      return res.status(418).json({ message: "No coffee in DB" });
+    }
 
     return res.status(200).json(latest);
   } catch (e) {
@@ -62,8 +64,8 @@ const litersBetween = async function (start: Date, end: Date) {
   ]);
 
   let liters = 0;
-  if(brews.length == 1){
-    liters = brews[0].liters
+  if (brews.length == 1) {
+    liters = brews[0].liters;
   }
-  return liters
-}
+  return liters;
+};
