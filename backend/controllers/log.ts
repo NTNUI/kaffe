@@ -49,7 +49,7 @@ export async function getLatest(req: Request, res: Response) {
 
     return res.status(200).json(latest[0]);
   } catch (e) {
-    return res.status(418).json({ message: "Error" });
+    return res.status(418).json({ message: "Error" + e });
   }
 }
 
