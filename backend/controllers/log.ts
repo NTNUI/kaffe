@@ -39,14 +39,17 @@ export async function getByDate(req: Request, res: Response) {
 
 export async function getLatest(req: Request, res: Response) {
   try {
-    const latest = await Brew.find().sort({ createdAt: -1 }).limit(1);
-    if (latest == null) {
+    const latest = await Brew.aggregate([
+      { $sort: { createdAt: -1 } },
+      { $limit: 1 },
+    ]);
+    if (latest.length < 1) {
       return res.status(418).json({ message: "No coffee in DB" });
     }
 
     return res.status(200).json(latest[0]);
   } catch (e) {
-    return res.status(418).json({ message: "Error" + e });
+    return res.status(418).json({ message: "Error" });
   }
 }
 
