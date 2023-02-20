@@ -11,8 +11,12 @@ const brewSchema = new Schema<brewType>(
       type: Number,
       required: true,
     },
+    brewTime: {
+      type: Date,
+      required: true,
+    },
   },
-  { collection: "brew", timestamps: true}
+  { collection: "brew" }
 );
 
 const Brew = model<brewType>("Brew", brewSchema);
