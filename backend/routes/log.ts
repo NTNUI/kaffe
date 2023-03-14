@@ -11,7 +11,7 @@ routes.post("/coffee/brew", logCoffee);
 // Params:
 // startDate: String(YYYY-MM-DD)
 // endDate: String(YYYY-MM-DD)
-routes.get("/coffee", getByDate);
+routes.post("/coffee", getByDate);
 
 routes.get("/coffee/latest", getLatest);
 
