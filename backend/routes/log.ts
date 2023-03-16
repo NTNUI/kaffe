@@ -13,6 +13,6 @@ routes.post("/coffee/brew", logCoffee);
 // endDate: String(YYYY-MM-DD)
 routes.post("/coffee", getByDate);
 
-routes.get("/coffee/latest", getLatest);
+routes.post("/coffee/latest", getLatest);
 
 export default routes;

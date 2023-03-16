@@ -49,6 +49,8 @@ export async function getByDate(req: Request, res: Response) {
 }
 
 export async function getLatest(req: Request, res: Response) {
+  const { textFormat } = req.body;
+
   try {
     const latest = await Brew.aggregate([
       { $sort: { brewTime: -1 } },
@@ -58,17 +60,22 @@ export async function getLatest(req: Request, res: Response) {
       return res.status(418).json({ message: "No coffee in DB" });
     }
 
-    const date = new Date(latest[0].brewTime).toLocaleString("no-EU", {
-      hour12: false,
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-    });
+    if (textFormat && textFormat == true) {
+      const date = new Date(latest[0].brewTime).toLocaleString("no-EU", {
+        hour12: false,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      });
 
-    return res.status(200).json({ brewTime: date, liters: latest[0].liters });
+      return res.status(200).json({ brewTime: date, liters: latest[0].liters });
+    }
+    return res
+      .status(200)
+      .json({ brewTime: latest[0].brewTime, liters: latest[0].liters });
   } catch (e) {
     return res.status(418).json({ message: "Error" + e });
   }

@@ -52,10 +52,15 @@
 </script>
 
 <div class="chart">
+  <h5 class="title">Last 7 days</h5>
   <Chart {data} type="line" bind:this={chartRef} />
 </div>
 
 <style>
+  .title {
+    color: #888;
+    margin: 0;
+  }
   .chart {
     width: 40em;
     max-width: 90vw;
