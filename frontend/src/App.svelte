@@ -1,11 +1,11 @@
 <script lang="ts">
+  import CoffeeStatsBox from "./lib/CoffeeStatsBox.svelte";
   import CoffeWeekChart from "./lib/CoffeWeekChart.svelte";
-  import LastCoffee from "./lib/LastCoffee.svelte";
 </script>
 
 <main>
   <div class="coffee-stats">
-    <LastCoffee />
+    <CoffeeStatsBox />
     <CoffeWeekChart />
   </div>
 
