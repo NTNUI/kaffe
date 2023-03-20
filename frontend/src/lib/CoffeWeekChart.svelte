@@ -44,7 +44,7 @@
 
       const json = await res.json();
       chartRef.addDataPoint(weekday[new Date(day).getDay()], [
-        json.liters.toFixed(),
+        json.liters.toFixed(1),
       ]);
     }
   };
