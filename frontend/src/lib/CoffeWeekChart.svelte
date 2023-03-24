@@ -52,7 +52,7 @@
 </script>
 
 <div class="chart">
-  <h5 class="title">Last 7 days</h5>
+  <h5 class="title">Last 7 days in liters</h5>
   <Chart {data} type="line" bind:this={chartRef} />
 </div>
 

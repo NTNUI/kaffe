@@ -14,6 +14,7 @@
 
 <style>
   .coffee-stats {
+    margin-top: 10vw;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
