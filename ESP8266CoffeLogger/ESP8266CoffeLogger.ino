@@ -18,7 +18,7 @@ const char *password = "";
 String brewType;
 
 // API URL
-const char *serverName = "https://api.coffee.ntnui.no/coffee/brew";
+const char *serverName = "https://api.kaffe.ntnui.no/coffee/brew";
 
 void setup()
 {

@@ -31,7 +31,7 @@
   const fetchLitersPerDay = async () => {
     for (const day of days) {
       const dayString = new Date(day).toLocaleDateString("af-NA");
-      const res = await fetch("https://api.coffee.ntnui.no/coffee/", {
+      const res = await fetch("https://api.kaffe.ntnui.no/coffee/", {
         method: "POST",
         headers: {
           "content-type": "application/json",

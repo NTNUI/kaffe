@@ -2,7 +2,7 @@
   let hours = 0;
   let minutes = 0;
   const fetchLastCoffee = async () => {
-    const res = await fetch("https://api.coffee.ntnui.no/coffee/latest", {
+    const res = await fetch("https://api.kaffe.ntnui.no/coffee/latest", {
       method: "POST",
       headers: {
         "content-type": "application/json",
