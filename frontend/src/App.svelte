@@ -1,15 +1,15 @@
 <script lang="ts">
   import CoffeeStatsBox from "./lib/CoffeeStatsBox.svelte";
   import CoffeWeekChart from "./lib/CoffeWeekChart.svelte";
+  import Heatmap from "./lib/Heatmap.svelte";
 </script>
 
 <main>
   <div class="coffee-stats">
     <CoffeeStatsBox />
     <CoffeWeekChart />
+    <Heatmap />
   </div>
-
-  <p class="love-banner">Coffee drunk with ❤️ at NTNUI</p>
 </main>
 
 <style>

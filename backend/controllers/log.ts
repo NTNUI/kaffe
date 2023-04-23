@@ -100,3 +100,48 @@ const litersBetween = async function (start: Date, end: Date) {
   }
   return liters;
 };
+
+export async function heatmapYear(req: Request, res: Response) {
+  // const numberOfDays = 90;
+  // const startDate = new Date(
+  //   new Date().setDate(new Date().getDate() - numberOfDays)
+  // );
+  const startDate = new Date(new Date().getFullYear(), 0, 1);
+  const endDate = new Date(Date.now());
+
+  try {
+    const data = await Brew.aggregate([
+      {
+        $match: {
+          brewTime: {
+            $gte: startDate,
+            $lte: endDate,
+          },
+        },
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$brewTime" } },
+          count: { $sum: "$liters" },
+        },
+      },
+    ]);
+
+    return res.status(200).json({
+      data,
+      start: Number(startDate),
+      end: Number(endDate),
+    });
+  } catch (e) {
+    return res.status(418).json({ message: "Error" });
+  }
+}
+
+const dateToDay = (date: Date) => {
+  return date.toLocaleString("no-EU", {
+    hour12: false,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+};

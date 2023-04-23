@@ -19,6 +19,8 @@
     "vite": "^4.1.0"
   },
   "dependencies": {
-    "svelte-frappe-charts": "^1.10.0"
+    "moment": "^2.29.4",
+    "svelte-frappe-charts": "^1.10.0",
+    "svelte-heatmap": "^1.0.2"
   }
 }

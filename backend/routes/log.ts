@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { getByDate, getLatest, logCoffee } from "../controllers/log";
+import {
+  getByDate,
+  getLatest,
+  heatmapYear,
+  logCoffee,
+} from "../controllers/log";
 
 const routes = Router();
 
@@ -14,5 +19,7 @@ routes.post("/coffee/brew", logCoffee);
 routes.post("/coffee", getByDate);
 
 routes.post("/coffee/latest", getLatest);
+
+routes.get("/coffee/heatmap", heatmapYear);
 
 export default routes;
