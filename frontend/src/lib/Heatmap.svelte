@@ -3,8 +3,8 @@
   import SvelteHeatmap from "svelte-heatmap";
 
   let data = [];
-  let startDate = new Date(Date.now());
   let endDate = new Date(Date.now());
+  let startDate = new Date(new Date().getTime() - 90 * 24 * 60 * 60 * 1000);
 
   const fetchChartData = async () => {
     let dataPoints = [];
