@@ -102,11 +102,10 @@ const litersBetween = async function (start: Date, end: Date) {
 };
 
 export async function heatmapYear(req: Request, res: Response) {
-  // const numberOfDays = 90;
-  // const startDate = new Date(
-  //   new Date().setDate(new Date().getDate() - numberOfDays)
-  // );
-  const startDate = new Date(new Date().getFullYear(), 0, 1);
+  const numberOfDays = 90;
+  const startDate = new Date(
+    new Date().setDate(new Date().getDate() - numberOfDays)
+  );
   const endDate = new Date(Date.now());
 
   try {

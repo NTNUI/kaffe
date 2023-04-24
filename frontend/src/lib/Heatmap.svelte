@@ -37,7 +37,6 @@
     allowOverflow={true}
     cellGap={6}
     cellRadius={2}
-    colors={["#a1dab4", "#42b6c4", "#2c7fb9", "#263494"]}
     fontColor={"white"}
     {data}
     dayLabelWidth={20}
