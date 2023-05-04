@@ -18,7 +18,7 @@ routes.post("/coffee/brew", logCoffee);
 // endDate: String(YYYY-MM-DD)
 routes.post("/coffee", getByDate);
 
-routes.post("/coffee/latest", getLatest);
+routes.get("/coffee/latest", getLatest);
 
 routes.get("/coffee/heatmap", heatmapYear);
 

@@ -1,24 +1,18 @@
 <script lang="ts">
+  import axios from "axios";
+  import { onMount } from "svelte";
+
   let result = 0;
   const firstDayInYear = String(new Date(Date.now()).getFullYear()) + "-01-01";
   const lastDayInYear = String(new Date(Date.now()).getFullYear()) + "-12-31";
 
-  async function fetchCoffeYear() {
-    const res = await fetch("https://api.kaffe.ntnui.no/coffee/", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        startDate: firstDayInYear,
-        endDate: lastDayInYear,
-      }),
+  onMount(async () => {
+    const res = await axios.post("/coffee", {
+      startDate: firstDayInYear,
+      endDate: lastDayInYear,
     });
-
-    const json = await res.json();
-    result = json.liters.toFixed();
-  }
-  fetchCoffeYear();
+    result = res.data.liters.toFixed();
+  });
 </script>
 
 {result}

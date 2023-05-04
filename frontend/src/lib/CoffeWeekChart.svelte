@@ -1,4 +1,6 @@
 <script lang="ts">
+  import axios from "axios";
+  import { onMount } from "svelte";
   import Chart from "svelte-frappe-charts";
   let chartRef;
 
@@ -28,27 +30,19 @@
   }
   days.reverse();
 
-  const fetchLitersPerDay = async () => {
+  onMount(async () => {
     for (const day of days) {
       const dayString = new Date(day).toLocaleDateString("af-NA");
-      const res = await fetch("https://api.kaffe.ntnui.no/coffee/", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          startDate: dayString,
-          endDate: dayString,
-        }),
+      const res = await axios.post("/coffee", {
+        startDate: dayString,
+        endDate: dayString,
       });
 
-      const json = await res.json();
       chartRef.addDataPoint(weekday[new Date(day).getDay()], [
-        json.liters.toFixed(1),
+        res.data.liters.toFixed(1),
       ]);
     }
-  };
-  fetchLitersPerDay();
+  });
 </script>
 
 <div class="chart">

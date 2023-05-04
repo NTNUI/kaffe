@@ -1,35 +1,33 @@
 <script>
+  import axios from "axios";
   import moment from "moment";
+  import { onMount } from "svelte";
   import SvelteHeatmap from "svelte-heatmap";
 
   let data = [];
   let endDate = new Date(Date.now());
-  let startDate = new Date(new Date().getTime() - 90 * 24 * 60 * 60 * 1000);
+  let startDate = new Date(new Date().getTime() - 60 * 24 * 60 * 60 * 1000);
 
-  const fetchChartData = async () => {
+  onMount(async () => {
+    const res = await axios.get("/coffee/heatmap");
+    constructChartData(await res.data);
+  });
+
+  const constructChartData = (chartData) => {
     let dataPoints = [];
-    const res = await fetch("https://api.kaffe.ntnui.no/coffee/heatmap", {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-      },
-    });
 
-    const resJson = await res.json();
-
-    for (const day of resJson.data) {
+    for (const day of chartData.data) {
       dataPoints.push({
         date: moment(day._id).toDate(),
         value: Math.ceil(day.count),
       });
     }
-    startDate = new Date(resJson.start);
-    endDate = new Date(resJson.end);
+    startDate = new Date(chartData.start);
+    endDate = new Date(chartData.end);
     data = dataPoints;
     console.log(dataPoints);
     return dataPoints;
   };
-  fetchChartData();
 </script>
 
 <div class="container">
