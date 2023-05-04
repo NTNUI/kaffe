@@ -102,8 +102,12 @@ const litersBetween = async function (start: Date, end: Date) {
 };
 
 export async function heatmapYear(req: Request, res: Response) {
-  // First day of this month
-  const endDate = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+  // Last day of this month
+  const endDate = new Date(
+    new Date().getFullYear(),
+    new Date().getMonth() + 1,
+    0
+  );
   // First day of two months ago
   const startDate = new Date(
     new Date().getFullYear(),
