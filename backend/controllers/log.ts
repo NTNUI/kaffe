@@ -102,11 +102,14 @@ const litersBetween = async function (start: Date, end: Date) {
 };
 
 export async function heatmapYear(req: Request, res: Response) {
-  const numberOfDays = 90;
+  // First day of this month
+  const endDate = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+  // First day of two months ago
   const startDate = new Date(
-    new Date().setDate(new Date().getDate() - numberOfDays)
+    new Date().getFullYear(),
+    new Date().getMonth() - 2,
+    1
   );
-  const endDate = new Date(Date.now());
 
   try {
     const data = await Brew.aggregate([
