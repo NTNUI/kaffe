@@ -9,8 +9,8 @@ on:
     branches:
       - main
     paths-ignore:
-      - '**'
-      - '!frontend/**'
+      - "**"
+      - "!frontend/**"
 
 jobs:
   build_and_deploy_job:
@@ -30,6 +30,8 @@ jobs:
           action: "upload"
           app_location: "/frontend" # App source code path
           output_location: "/dist" # Built app content directory
+        env:
+          VITE_API_URL: https://api.kaffe.ntnui.no
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
