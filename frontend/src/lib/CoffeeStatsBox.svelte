@@ -13,12 +13,13 @@
 
   <div class="section">
     <h4 class="title">
-      Liters brewed in {String(new Date(Date.now()).getFullYear())}:
+      <!-- Liters brewed in {String(new Date(Date.now()).getFullYear())}: -->
+      Liters brewed this semester
     </h4>
     <h4 class="content">
       <LitersThisYear />
     </h4>
-    <h6 class="notice">(Logging started 13.03)</h6>
+    <h6 class="notice">(Logging started 30.08)</h6>
   </div>
 </div>
 

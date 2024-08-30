@@ -37,7 +37,6 @@
     cellRadius={2}
     fontColor={"white"}
     {data}
-    colors={["#7cdde6", "#1f92a1", "#15747d", "#0d5257", "#062426"]}
     dayLabelWidth={20}
     emptyColor={"#ecedf0"}
     {endDate}
