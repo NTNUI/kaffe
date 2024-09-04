@@ -44,6 +44,7 @@
     monthLabelHeight={20}
     {startDate}
     view={"monthly"}
+    unit={{ single: "litre", plural: "litres" }}
   />
 </div>
 
