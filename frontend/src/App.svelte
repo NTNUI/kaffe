@@ -50,5 +50,6 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 2em;
+    text-align: center;
   }
 </style>
