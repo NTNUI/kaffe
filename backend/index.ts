@@ -2,14 +2,16 @@ import express, { Application } from "express";
 import mongoConnect from "./utils/db";
 import dotenv from "dotenv";
 import cors from "cors";
-import routes from "./routes/log";
+import routes from "./routes/routes";
 
 dotenv.config();
 
 const app: Application = express();
-app.use(cors({
-  origin: '*'
-}));
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 const port = process.env.BACKEND_PORT || 3000;
 
 mongoConnect();
