@@ -57,27 +57,41 @@ export async function getLatest(req: Request, res: Response) {
       { $limit: 1 },
     ]);
     if (latest.length < 1) {
-      return res.status(418).json({ message: "No coffee in DB" });
+      return res
+        .status(418)
+        .json({
+          message: "No coffee brewed yet, sounds like a good time to start!",
+        });
     }
 
-    if (textFormat && textFormat == true) {
-      const date = new Date(latest[0].brewTime).toLocaleString("no-EU", {
-        hour12: false,
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      });
+    // Calculate the time since the last brew in hours and minutes
+    const diffMs = Date.now() - new Date(latest[0].brewTime).getTime();
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+    const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+    const hoursText = diffHours === 1 ? "hour" : "hours";
+    const minutesText = diffMinutes === 1 ? "minute" : "minutes";
 
-      return res.status(200).json({ brewTime: date, liters: latest[0].liters });
-    }
-    return res
-      .status(200)
-      .json({ brewTime: latest[0].brewTime, liters: latest[0].liters });
+    const timeSince = `${diffHours} ${hoursText} and ${diffMinutes} ${minutesText}`;
+
+    const { brewTime, liters } = latest[0];
+    const response = {
+      brewTime: textFormat
+        ? new Date(brewTime).toLocaleString("no-EU", {
+            hour12: false,
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          })
+        : brewTime,
+      liters,
+      timeSince,
+    };
+    return res.status(200).json(response);
   } catch (e) {
-    return res.status(418).json({ message: "Error" + e });
+    return res.status(418).json({ message: `Error: ${e}` });
   }
 }
 
