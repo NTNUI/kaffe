@@ -2,8 +2,10 @@
   import axios from "axios";
   import { onMount } from "svelte";
   import Chart from "svelte-frappe-charts";
+
   let chartRef;
 
+  // Initialize chart data
   let data = {
     labels: [],
     datasets: [
@@ -23,24 +25,37 @@
     "Saturday",
   ];
 
-  // Array of the last 7 weekdays in date format
-  let days: Date[] = [];
+  // Generate an array of the last 7 days as strings in YYYY-MM-DD format
+  let days: string[] = [];
   for (let i = 0; i < 7; i++) {
-    days.push(new Date(new Date().setDate(new Date().getDate() - i)));
+    const date = new Date();
+    date.setDate(date.getDate() - i);
+    days.push(date.toISOString().split("T")[0]);
   }
   days.reverse();
 
   onMount(async () => {
-    for (const day of days) {
-      const dayString = new Date(day).toLocaleDateString("af-NA");
-      const res = await axios.post("/coffee", {
-        startDate: dayString,
-        endDate: dayString,
+    try {
+      const res = await axios.post("/coffee/days", { days });
+
+      const labels: string[] = [];
+      const values: number[] = [];
+      res.data.forEach((dayData: { date: string; liters: number }) => {
+        const dayIndex = new Date(dayData.date).getDay();
+        labels.push(weekday[dayIndex]);
+        values.push(Number(dayData.liters.toFixed(1)));
       });
 
-      chartRef.addDataPoint(weekday[new Date(day).getDay()], [
-        res.data.liters.toFixed(1),
-      ]);
+      data = {
+        labels,
+        datasets: [
+          {
+            values,
+          },
+        ],
+      };
+    } catch (error) {
+      console.error("Error fetching week-chart:", error);
     }
   });
 </script>
