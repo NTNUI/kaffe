@@ -29,6 +29,17 @@
     <div class="card-back">
       <div class="info-box">
         <p class="content">
+          <a
+            href="https://www.icloud.com/shortcuts/b30c3805f6b546dca3a39ab06b7685cc"
+          >
+            <img
+              src="/shortcut.png"
+              alt="Shortcut"
+              width="80"
+              height="auto"
+              id="shortcut"
+            />
+          </a>
           <MostBrewed />
         </p>
       </div>
@@ -37,6 +48,11 @@
 </div>
 
 <style>
+  #shortcut {
+    position: fixed;
+    bottom: 4px;
+    right: 1px;
+  }
   .card-container {
     perspective: 1000px;
     width: 100%;
