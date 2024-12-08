@@ -10,7 +10,7 @@
     <div class="card-front">
       <div class="info-box">
         <div class="section">
-          <h4 class="title">Since last brew:</h4>
+          <h4 class="title">Since last brew</h4>
           <h4 class="content">
             <LastCoffee />
           </h4>

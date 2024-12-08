@@ -1,6 +1,6 @@
 <script lang="ts">
   import CoffeeStatsBox from "./lib/CoffeeStatsBox.svelte";
-  import CoffeWeekChart from "./lib/CoffeWeekChart.svelte";
+  import CoffeeWeekChart from "./lib/CoffeeWeekChart.svelte";
   import Heatmap from "./lib/Heatmap.svelte";
   import { onMount } from "svelte";
   import axios from "axios";
@@ -33,7 +33,7 @@
 <main>
   <div class="coffee-stats">
     <CoffeeStatsBox />
-    <CoffeWeekChart />
+    <CoffeeWeekChart />
     <Heatmap
       data={heatmapData.data}
       start={heatmapData.start}

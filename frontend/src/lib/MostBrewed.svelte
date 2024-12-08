@@ -7,7 +7,7 @@
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
     const day = date.getDate();
-    const month = date.toLocaleString("default", { month: "long" });
+    const month = date.toLocaleString("en-CA", { month: "long" });
     const year = date.getFullYear();
     return `${day}. ${month} ${year}`;
   };
@@ -20,13 +20,14 @@
 
 {#if data}
   <div>
-    <p>Overall brew record</p>
     <p>
+      Overall brew record<br />
       <strong>{formatDate(data.overall.date)}</strong><br />
       <strong>{data.overall.liters.toFixed(0)} liters</strong>
     </p>
     <p>
       This month<br />
+      <strong>{formatDate(data.thisMonth.date)}</strong><br />
       <strong>{data.thisMonth.liters.toFixed(0)} liters</strong>
     </p>
   </div>
