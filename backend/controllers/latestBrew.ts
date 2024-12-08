@@ -3,6 +3,7 @@ import { Brew } from "../models/brew";
 
 export async function getLatestBrew(req: Request, res: Response) {
   const { textFormat } = req.body;
+  const { norsk } = req.query;
 
   try {
     const latest = await Brew.aggregate([
@@ -19,10 +20,20 @@ export async function getLatestBrew(req: Request, res: Response) {
     const diffMs = Date.now() - new Date(latest[0].brewTime).getTime();
     const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
     const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-    const hoursText = diffHours === 1 ? "hour" : "hours";
-    const minutesText = diffMinutes === 1 ? "minute" : "minutes";
+    const hoursText =
+      diffHours === 1 ? (norsk ? "time" : "hour") : norsk ? "timer" : "hours";
+    const minutesText =
+      diffMinutes === 1
+        ? norsk
+          ? "minutt"
+          : "minute"
+        : norsk
+        ? "minutter"
+        : "minutes";
 
-    const timeSince = `${diffHours} ${hoursText} and ${diffMinutes} ${minutesText}`;
+    const timeSince = `${diffHours} ${hoursText} ${
+      norsk ? "og" : "and"
+    } ${diffMinutes} ${minutesText}`;
 
     const { brewTime, liters } = latest[0];
     const response = {
